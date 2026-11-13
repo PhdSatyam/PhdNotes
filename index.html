@@ -6,30 +6,31 @@
 <title>Thesis Reading Room</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..700,100,1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
 <style>
 /* Layout idea: dashboard strip on top, then contents rail | page reader | study panel. Navy and teal match the Excel dashboard. */
+/* Retro-warm theme: beige paper, maroon accent, mustard highlights, rounded shapes, offset shadows. */
 :root{
-  --bg:#F3F5F9; --panel:#FFFFFF; --ink:#1F2A44; --muted:#5B6780; --line:#DCE1EA; --soft:#EAF0F6;
-  --accent:#0E9AA7; --accent-ink:#FFFFFF; --accent-soft:#D9F0F2;
-  --good:#2E8B62; --good-soft:#DDF1E6; --warn:#B57A00; --warn-soft:#FBEBC8; --bad:#B5362A; --bad-soft:#F8DAD6;
-  --ui:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif; --serif:'Source Serif 4',Georgia,serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
-  --shadow:0 1px 2px rgba(31,42,68,.06),0 4px 14px rgba(31,42,68,.05);
+  --bg:#F2E8D5; --panel:#FBF5E8; --ink:#2E1D18; --muted:#7A6657; --line:#DCC9A8; --soft:#EFE1C7; --edge:#C9B08A;
+  --accent:#7B1E2B; --accent-ink:#FBF1E1; --accent-soft:#EBD0C6; --gold:#D6A032; --gold-soft:#F5E0A8;
+  --good:#3F7D4E; --good-soft:#DCEAD3; --warn:#9A6A12; --warn-soft:#F6E4B5; --bad:#A3302A; --bad-soft:#F2D2C8;
+  --ui:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif; --serif:'Source Serif 4',Georgia,serif; --mono:'IBM Plex Mono',ui-monospace,monospace; --display:'Fraunces','Source Serif 4',Georgia,serif;
+  --shadow:3px 3px 0 #E2D0AE; --shadow-a:2px 2px 0 #4A0F19;
   color-scheme:light;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --bg:#0E1524; --panel:#162033; --ink:#E6ECF6; --muted:#98A5BE; --line:#27324D; --soft:#1C2740;
-    --accent:#3BC3CF; --accent-ink:#06222A; --accent-soft:#16363F;
-    --good:#58C493; --good-soft:#173A2C; --warn:#F2B84B; --warn-soft:#3E3217; --bad:#EF7D70; --bad-soft:#47201C;
-    --shadow:0 1px 2px rgba(0,0,0,.35),0 4px 14px rgba(0,0,0,.25); color-scheme:dark;
+    --bg:#1D1512; --panel:#2A1E19; --ink:#F3E8D4; --muted:#BBA68D; --line:#4A372E; --soft:#35261F; --edge:#5E4638;
+    --accent:#D9707F; --accent-ink:#2A0F14; --accent-soft:#4D2730; --gold:#E3B04B; --gold-soft:#4B3A17;
+    --good:#7CC08A; --good-soft:#223A28; --warn:#E8B64F; --warn-soft:#44341A; --bad:#EE8579; --bad-soft:#4A2420;
+    --shadow:3px 3px 0 #120C0A; --shadow-a:2px 2px 0 #7A3340; color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#0E1524; --panel:#162033; --ink:#E6ECF6; --muted:#98A5BE; --line:#27324D; --soft:#1C2740;
-  --accent:#3BC3CF; --accent-ink:#06222A; --accent-soft:#16363F;
-  --good:#58C493; --good-soft:#173A2C; --warn:#F2B84B; --warn-soft:#3E3217; --bad:#EF7D70; --bad-soft:#47201C;
-  --shadow:0 1px 2px rgba(0,0,0,.35),0 4px 14px rgba(0,0,0,.25); color-scheme:dark;
+  --bg:#1D1512; --panel:#2A1E19; --ink:#F3E8D4; --muted:#BBA68D; --line:#4A372E; --soft:#35261F; --edge:#5E4638;
+  --accent:#D9707F; --accent-ink:#2A0F14; --accent-soft:#4D2730; --gold:#E3B04B; --gold-soft:#4B3A17;
+  --good:#7CC08A; --good-soft:#223A28; --warn:#E8B64F; --warn-soft:#44341A; --bad:#EE8579; --bad-soft:#4A2420;
+  --shadow:3px 3px 0 #120C0A; --shadow-a:2px 2px 0 #7A3340; color-scheme:dark;
 }
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;line-height:1.45}
@@ -176,6 +177,85 @@ input[type="search"]{width:100%;border:1px solid var(--line);border-radius:8px;p
 }
 @media (max-width:480px){.wrap{padding:10px}.strip{grid-template-columns:repeat(2,minmax(0,1fr))}.seg button{padding:6px 8px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---- retro layer ---- */
+html,body{background-color:var(--bg);background-image:radial-gradient(rgba(123,30,43,.08) 1px,transparent 1.3px);background-size:20px 20px}
+h1,h2,h3,.stat b,.ring text{font-family:var(--display);font-variation-settings:"SOFT" 100,"WONK" 1}
+h1{font-weight:650;color:var(--accent);letter-spacing:-.01em}
+h2{font-weight:600}
+.card,.top,.bar,.where,.stage{border:1.5px solid var(--edge)}
+.top{border-radius:22px;box-shadow:var(--shadow);position:relative;padding:22px 18px 16px;overflow:hidden}
+.top::before{content:"";position:absolute;left:0;right:0;top:0;height:8px;background:linear-gradient(var(--accent) 0 40%,var(--gold) 40% 70%,var(--edge) 70%)}
+.card{border-radius:20px;box-shadow:var(--shadow)}
+.eyebrow{color:var(--accent);letter-spacing:.14em}
+.btn{border:1.5px solid var(--edge);border-radius:999px;padding:7px 15px;background:var(--panel)}
+.btn:hover{background:var(--accent-soft)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);box-shadow:var(--shadow-a)}
+.btn.primary:hover{filter:none;transform:translate(1px,1px);box-shadow:1px 1px 0 #4A0F19}
+.btn.sm{padding:4px 11px}
+.btn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent)}
+.stats{display:flex;flex-wrap:wrap;gap:14px 0;align-items:center}
+.stat{display:grid;gap:0;padding:0 22px;border-left:2px dotted var(--edge);min-width:0}
+.stat:first-child{padding-left:0;border-left:0}
+.stat b{font-size:26px;font-weight:650;line-height:1.1;color:var(--ink)}
+.stat small{color:var(--muted);font-size:12px}
+.ringstat{display:flex;gap:12px;align-items:center}
+.ring{width:58px;height:58px}
+.ring circle{stroke-width:9}
+.ring .bg{stroke:var(--line)}
+.ring text{font-size:17px}
+.bars7{height:18px;margin-top:3px}
+.bars7 span{background:var(--gold);opacity:1;border-radius:3px}
+.chip{border:1.5px solid var(--edge);border-radius:999px;padding:6px 14px;background:var(--panel)}
+.chip:hover{border-color:var(--accent);background:var(--accent-soft)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);box-shadow:var(--shadow-a)}
+.chip.on .t span:last-child{color:var(--accent-ink);opacity:.85}
+.chip.on .meter{background:rgba(251,241,225,.28)}
+.chip.on .meter i{background:var(--accent-ink)}
+.meter{height:6px;border-radius:999px;background:var(--line)}
+.meter i{border-radius:999px;background:var(--accent)}
+.meter.amber i{background:var(--gold)}
+.phs{gap:8px;margin-bottom:0}
+.how{margin-top:10px;padding-top:10px;border-top:2px dotted var(--edge)}
+.cols{gap:18px;margin-top:18px}
+.chap{border-top:2px dotted var(--line)}
+.sec{border-radius:10px}
+.sec.here{background:var(--accent-soft);box-shadow:inset 0 0 0 1.5px var(--accent)}
+.dot{border-color:var(--edge)}
+.bar{border-radius:20px 20px 0 0;background:var(--panel)}
+.seg{border:1.5px solid var(--edge);border-radius:999px}
+.seg button{background:var(--panel)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.seg button+button{border-left:1.5px solid var(--edge)}
+.pager input{border:1.5px solid var(--edge);border-radius:999px;background:var(--bg)}
+.tools{display:inline-flex;gap:2px;align-items:center}
+.tools .btn{border-color:transparent;background:transparent;padding:4px 10px;color:var(--muted)}
+.tools .btn:hover{background:var(--accent-soft);color:var(--ink)}
+.tools .btn[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent)}
+.where{border-top:0;background:var(--panel)}
+.pill{background:var(--soft);border:1px solid var(--line)}
+.pill.read{background:var(--good-soft);border-color:transparent}
+.stage{border-radius:0 0 20px 20px}
+.pagebox{background:var(--soft);border-radius:16px}
+.pagebox img{border-radius:6px;box-shadow:3px 3px 0 var(--edge),0 6px 18px rgba(46,29,24,.14);filter:sepia(.1) saturate(.95)}
+.pagebox.night img{filter:invert(.9) hue-rotate(180deg) sepia(.2)}
+.textbox mark,.item mark{background:var(--gold-soft);color:var(--ink);box-shadow:0 0 0 2px var(--gold-soft)}
+.warnnote{border-radius:12px}
+.tabs{border-radius:20px 20px 0 0;border-bottom:2px dotted var(--edge);padding:0 6px}
+.tabs button{border-bottom:3px solid transparent;border-radius:999px 999px 0 0}
+.tabs button[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+textarea,input[type="search"]{border:1.5px solid var(--edge);border-radius:14px;background:var(--bg)}
+.item{border:1.5px solid var(--line);border-radius:14px}
+.item:hover{border-color:var(--accent);background:var(--accent-soft)}
+.qcard{border:1.5px solid var(--edge);border-radius:18px;box-shadow:var(--shadow)}
+.qcard .a{border-radius:14px;background:var(--soft);border-left:4px solid var(--gold)}
+.lv{background:var(--gold-soft);color:var(--ink)}
+.rate button{border:1.5px solid var(--edge);border-radius:999px}
+.qd{border:1.5px solid var(--edge);border-radius:999px;width:32px}
+.toast{background:var(--accent);color:var(--accent-ink)}
+select{border-radius:999px!important;border:1.5px solid var(--edge)!important;background:var(--bg)!important}
+.ringstat>div{display:grid;gap:0}
+@media (max-width:860px){.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px 0}.ringstat{grid-column:1/-1}.stat,.stat:nth-child(odd){padding:0 0 0 14px;border-left:2px dotted var(--edge)}.stat:first-child{padding-left:0;border-left:0}}
 </style>
 </head>
 <body>
@@ -298,15 +378,14 @@ function renderTop(){
   $("top").innerHTML=
    '<div class="top-head"><div><div class="eyebrow">Complete Book · Phase '+CUR+' of '+PH.length+' · printed pp. '+FIRST+'–'+LAST+'</div><h1>'+esc(PH[CUR-1].title)+'</h1><div class="sub">Chapters '+CH[0].n+'–'+CH[CH.length-1].n+' · Plan estimate '+ht.toFixed(1)+' h · whole book: '+bookRead()+' of '+M.last+' pages read</div></div>'+
    '<div class="top-actions"><span class="save"><i></i><span id="savetxt">'+(status==="account"?"Saved to your account":(window.claude&&window.claude.use?"Saved in this browser only":"Saved in this browser (use Export to back up)"))+'</span></span>'+(window.claude&&window.claude.use?'':'<button class="btn" id="exp" title="Download your progress as a file">Export</button><button class="btn" id="imp" title="Load a progress file">Import</button><input type="file" id="impf" accept=".json" style="display:none">')+'<button class="btn" id="theme" title="Switch light or dark">Theme</button><button class="btn primary" data-go="'+S.last+'">Continue at p. '+S.last+'</button></div></div>'+
-   '<div class="tiles">'+
-    '<div class="tile ringtile"><svg class="ring" viewBox="0 0 72 72" role="img" aria-label="'+Math.round(pct*100)+' percent of pages read"><circle class="bg" cx="36" cy="36" r="30"/><circle class="fg" cx="36" cy="36" r="30" stroke-dasharray="'+c.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'" transform="rotate(-90 36 36)"/><text x="36" y="41" text-anchor="middle">'+Math.round(pct*100)+'%</text></svg><div><div class="eyebrow">Phase '+CUR+'</div><small>of pages read</small></div></div>'+
-    '<div class="tile"><div class="eyebrow">Pages read</div><b class="num">'+r+' / '+n+'</b><small>'+(n-r)+' to go</small></div>'+
-    '<div class="tile"><div class="eyebrow">Time left</div><b class="num">'+fmtH(hl)+'</b><small>at your Plan pace</small></div>'+
-    '<div class="tile"><div class="eyebrow">Self-check</div><b class="num">'+Math.round(ms*100)+'%</b><small>'+rt+' of '+all.length+' questions rated</small></div>'+
-    '<div class="tile"><div class="eyebrow">Today</div><b class="num">'+Math.round(tm)+' min</b><div class="bars7" aria-label="Minutes studied, last 7 days">'+bars+'</div><small>'+studied+' day'+(studied===1?'':'s')+' studied</small></div>'+
+   '<div class="stats">'+
+    '<div class="stat ringstat"><svg class="ring" viewBox="0 0 72 72" role="img" aria-label="'+Math.round(pct*100)+' percent of pages read"><circle class="bg" cx="36" cy="36" r="30"/><circle class="fg" cx="36" cy="36" r="30" stroke-dasharray="'+c.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'" transform="rotate(-90 36 36)"/><text x="36" y="42" text-anchor="middle">'+Math.round(pct*100)+'%</text></svg><div><b class="num">Phase '+CUR+'</b><small>of pages read</small></div></div>'+
+    '<div class="stat"><b class="num">'+r+' / '+n+'</b><small>pages read</small></div>'+
+    '<div class="stat"><b class="num">'+fmtH(hl)+'</b><small>left at Plan pace</small></div>'+
+    '<div class="stat"><b class="num">'+Math.round(ms*100)+'%</b><small>self-check · '+rt+' of '+all.length+' rated</small></div>'+
+    '<div class="stat"><b class="num">'+Math.round(tm)+' min</b><small>today · '+studied+' day'+(studied===1?'':'s')+' studied</small><div class="bars7" aria-label="Minutes studied, last 7 days">'+bars+'</div></div>'+
    '</div>'+
-   '<div class="strip phs" aria-label="Phases">'+phstrip+'</div><div class="strip" aria-label="Chapters">'+strip+'</div>'+
-   '<details class="how"><summary>How progress is tracked</summary><p>Pressing Next (or \u2192) marks the page you leave as read. You can also toggle Read on any page. Chapter and section bars come from those pages. Time counts only while this tab is open and you are active. Self-check ratings feed the Self-check score. Your state is saved to your account when you are signed in, and always in this browser.</p></details>';
+   '<div class="strip phs" aria-label="Phases">'+phstrip+'</div>';
 }
 
 /* ---------- render: rail ---------- */
@@ -324,7 +403,7 @@ function renderRail(){
       h+='<li><button class="sec'+(cur===s.page?' here':'')+'" data-go="'+s.page+'"><span class="dot '+st+'"></span><span>'+esc(label)+'</span><span class="pg">p. '+s.page+'</span></button></li>';});
       h+='</ul>';}
     h+='</div>';});
-  h+='</div>';
+  h+='</div>'+'<details class="how"><summary>How progress is tracked</summary><p>Pressing Next (or \u2192) marks the page you leave as read. You can also toggle Read on any page. Chapter and section bars come from those pages. Time counts only while this tab is open and you are active. Self-check ratings feed the Self-check score. Your state is saved to your account when you are signed in, and always in this browser.</p></details>';
   $("rail").innerHTML=h;
 }
 
@@ -361,11 +440,11 @@ function renderReader(){
    '<div class="bar"><div class="seg" role="group" aria-label="View"><button data-view="page" aria-pressed="'+(v==="page")+'">Page</button><button data-view="text" aria-pressed="'+(v==="text")+'">Text</button><button data-view="split" aria-pressed="'+(v==="split")+'">Split</button></div>'+
    '<div class="pager"><button class="btn sm" id="pv" aria-label="Previous page" '+(p<=1?'disabled':'')+'>\u2190</button><input id="pj" type="text" inputmode="numeric" value="'+p+'" aria-label="Go to printed page"><span class="muted num">of '+M.last+'</span><button class="btn sm" id="nx" aria-label="Next page" '+(p>=M.last?'disabled':'')+'>\u2192</button></div>'+
    '<span class="sp"></span>'+
-   '<button class="btn sm" id="zo" aria-label="Zoom out">\u2212</button><span class="muted num">'+Math.round(S.set.zoom*100)+'%</span><button class="btn sm" id="zi" aria-label="Zoom in">+</button>'+
-   '<button class="btn sm" id="night" aria-pressed="'+S.set.night+'" title="Invert page colours for night reading">Night page</button>'+
-   '<button class="btn sm" id="bm" aria-pressed="'+bm+'">'+(bm?'\u2605 Bookmarked':'\u2606 Bookmark')+'</button>'+
    '<button class="btn sm primary" id="rd" aria-pressed="'+rd+'">'+(rd?'\u2713 Read':'Mark read')+'</button></div>'+
-   '<div class="where"><b>'+(ch?'Ch. '+ch.n+' · '+esc(ch.title):'Phase '+CUR+' opener')+'</b><span class="pill mute num">p. '+p+' · PDF '+pg.pdf+'</span>'+(rd?'<span class="pill read">Read</span>':'')+chips+'</div>'+
+   '<div class="where"><b>'+(ch?'Ch. '+ch.n+' · '+esc(ch.title):'Phase '+CUR+' opener')+'</b><span class="pill mute num">p. '+p+' · PDF '+pg.pdf+'</span>'+(rd?'<span class="pill read">Read</span>':'')+chips+'<span class="tools" style="margin-left:auto">'+
+   '<button class="btn sm" id="zo" aria-label="Zoom out">\u2212</button><span class="muted num">'+Math.round(S.set.zoom*100)+'%</span><button class="btn sm" id="zi" aria-label="Zoom in">+</button>'+
+   '<button class="btn sm" id="night" aria-pressed="'+S.set.night+'" title="Invert page colours for night reading">Night</button>'+
+   '<button class="btn sm" id="bm" aria-pressed="'+bm+'">'+(bm?'\u2605 Bookmarked':'\u2606 Bookmark')+'</button></span></div>'+
    '<div class="stage">'+inner+'<div class="foot"><button class="btn" id="pv2" '+(p<=1?'disabled':'')+'>\u2190 Previous page</button><label class="muted" style="display:inline-flex;gap:6px;align-items:center"><input type="checkbox" id="auto" '+(S.set.auto?'checked':'')+'> Mark as read when I press Next</label><button class="btn primary" id="nx2" '+(p>=M.last?'disabled':'')+'>'+(S.set.auto&&!rd?'Mark read and next \u2192':'Next page \u2192')+'</button></div></div>';
 }
 
