@@ -1,15 +1,12 @@
-# Phase 4 Reading Room — System GMM (Complete Book, pp. 141–186)
+# Thesis Reading Room — Uncertainty, Credit and Climate (Complete Book)
 
-Interactive study reader: exact page images, extracted text, progress tracking,
-notes/highlights, bookmarks, search and 81 self-check questions.
+Interactive study reader for all six phases (printed pp. 1–276, 42 chapters):
+exact page images, extracted text, progress tracking, notes, bookmarks,
+search (this phase or the whole book) and 457 self-check questions.
 
 Static site, no build step. Progress is stored in your browser; use **Export /
 Import** (top right) to back it up or move it between devices.
 
 ## Publish on GitHub Pages
-1. Create a repo and push these files to `main`.
-2. Settings → Pages → Source: *Deploy from a branch* → `main` / `(root)`.
-3. Open `https://<username>.github.io/<repo>/`.
-
-Free Pages needs a **public** repo, so the page images and text become public.
-Check the source material's copyright first.
+Settings → Pages → Deploy from a branch → `main` / `(root)`, then open
+`https://<username>.github.io/<repo>/`. Free Pages needs a public repo.
