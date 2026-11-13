@@ -10,3 +10,6 @@ Import** (top right) to back it up or move it between devices.
 ## Publish on GitHub Pages
 Settings → Pages → Deploy from a branch → `main` / `(root)`, then open
 `https://<username>.github.io/<repo>/`. Free Pages needs a public repo.
+
+## Lecture Notes and Reading plan
+Version 4 adds the Lecture Notes as a second book (`data/ln/`, `img/ln/`) and a Reading plan tab that orders chapters from both books. Progress for each book is stored separately.

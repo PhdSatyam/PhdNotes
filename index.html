@@ -75,7 +75,7 @@ h1,h2,h3{margin:0;font-weight:600;text-wrap:balance;font-family:var(--display);f
 .bars7 span{flex:1;background:var(--gold);border-radius:3px;min-height:2px}
 .bars7 span.z{background:var(--line)}
 .strip{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px}
-.phs{grid-template-columns:repeat(6,minmax(0,1fr))}
+.phs{grid-template-columns:repeat(var(--np,6),minmax(0,1fr))}
 .chip{border:1.5px solid var(--c,var(--edge));background:var(--panel);border-radius:999px;padding:6px 14px;text-align:left;display:grid;gap:4px}
 .chip:hover{background:color-mix(in srgb,var(--c,var(--accent)) 14%,var(--panel))}
 .chip.on{background:var(--c,var(--accent));color:var(--ci,var(--accent-ink));box-shadow:var(--shadow-a)}
@@ -199,11 +199,66 @@ select{border-radius:999px!important;border:1.5px solid var(--edge)!important;ba
 }
 @media (max-width:480px){.wrap{padding:10px}.phs{grid-template-columns:repeat(2,minmax(0,1fr))}.seg button{padding:6px 9px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* v4: slim contents sidebar, book tabs, reading plan */
+[hidden]{display:none!important}
+.cols{grid-template-columns:244px minmax(0,1fr);align-items:start}
+.rail{grid-column:1;grid-row:1/span 2;position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto;padding:12px 12px 14px;display:block;scrollbar-width:thin}
+.rail h2{font-size:16px;color:var(--accent)}
+.reader{grid-column:2;grid-row:1}
+.side{grid-column:2;grid-row:2;max-width:none;margin:0}
+.focus .cols{grid-template-columns:minmax(0,1fr)}.focus .reader,.focus .side{grid-column:1}
+.chaps{margin-top:6px}
+.chap{border-top:2px dotted var(--line);padding:8px 0}
+.chap:first-child{border-top:0}
+.chap-h{width:100%;background:none;border:0;text-align:left;padding:2px 0;display:grid;gap:5px}
+.chap-h .l1{display:flex;justify-content:space-between;gap:8px;font-weight:600;font-size:13px;line-height:1.3}
+.chap-h .l1 span:last-child{color:var(--muted);font-weight:500;font-size:11.5px;white-space:nowrap}
+.chap-h .l2{font-size:11.5px;color:var(--muted)}
+.secs{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:1px}
+.sec{width:100%;background:none;border:0;border-radius:10px;padding:4px 6px;text-align:left;display:grid;grid-template-columns:14px 1fr auto;gap:7px;align-items:start;font-size:12.5px;line-height:1.3}
+.sec:hover{background:var(--soft)}
+.sec.here{background:var(--accent-soft);box-shadow:inset 0 0 0 1.5px var(--accent)}
+.sec .dot{margin-top:3px}
+.sec .pg{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:2px}
+.books{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.btab{border:1.5px solid var(--edge);background:var(--panel);border-radius:999px;padding:6px 15px;font-weight:600;display:inline-flex;gap:8px;align-items:baseline}
+.btab small{font-weight:500;opacity:.7;font-size:11.5px}
+.btab:hover{background:var(--soft)}
+.btab[aria-selected="true"]{background:var(--ink);color:var(--panel);border-color:var(--ink);box-shadow:var(--shadow-a)}
+.plan{max-width:1100px;margin:16px auto 0;display:grid;gap:16px}
+.pnext{border:1.5px solid var(--accent);background:var(--accent-soft);border-radius:20px;padding:14px 16px;display:grid;gap:8px;box-shadow:var(--shadow)}
+.pnext h2{font-size:19px}
+.pnext .then{display:flex;gap:6px;flex-wrap:wrap}
+.pstage{padding:14px 16px 8px;display:grid;gap:4px}
+.pst-h{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;justify-content:space-between}
+.pst-h h2{font-size:18px}
+.pgrp{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:12px 0 2px;padding-top:8px;border-top:2px dotted var(--line)}
+.prow{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:10px;align-items:start;padding:9px 0;border-top:1px solid var(--line)}
+.pgrp+.prow{border-top:0}
+.prow.done{opacity:.62}
+.pn{font:600 12px var(--mono);color:var(--muted);padding-top:3px}
+.pbody{display:grid;gap:4px;min-width:0}
+.ptitle{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.ptitle b{font-weight:600}
+.bk{font:600 11px var(--mono);padding:2px 8px;border-radius:999px;color:#fff}
+.bk-cb{background:#6A4FD6}.bk-ln{background:#0B8F87}
+.pwhy{margin:0;font-size:13px;color:var(--muted);max-width:80ch}
+.pact{display:grid;gap:5px;justify-items:end;align-content:start}
+.pact .pp{font-weight:600;font-size:12px}
+.pbody .meter{max-width:340px}
+@media (max-width:1000px){
+  .cols{grid-template-columns:minmax(0,1fr)}
+  .rail{grid-column:1;grid-row:3;position:static;max-height:none}
+  .reader,.side{grid-column:1}
+}
+@media (max-width:620px){.prow{grid-template-columns:24px minmax(0,1fr)}.pact{grid-column:2;justify-items:start;display:flex;gap:10px;align-items:center}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <section class="top" id="top" aria-label="Reading progress"></section>
+  <section id="plan" class="plan" hidden aria-label="Reading plan"></section>
   <div class="cols">
     <aside class="card rail" id="rail" aria-label="Contents"></aside>
     <main class="reader" id="reader"></main>
@@ -213,26 +268,32 @@ select{border-radius:999px!important;border:1.5px solid var(--edge)!important;ba
 <div class="hlpop" id="hlpop" hidden></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script src="data/manifest.js"></script>
+<script src="data/ln/manifest.js"></script>
 <script>
 (function(){
 "use strict";
-var M=window.MANIFEST, PH=M.phases, CHALL=M.chapters;
-var PAGES=[],CH=[],CARDS=[],FIRST=1,LAST=1,CUR=1,BYP={},CHBY={};
-CHALL.forEach(function(c){CHBY[c.n]=c;});
-var KEY="book-reading-v1", OLDKEY="phase4-reading-v1";
+var BOOKS={
+  cb:{k:"cb",name:"Complete Book",M:window.MANIFEST,pd:"PHASE_DATA",dir:"data/",img:"img/p",unit:"Phase",key:"book-reading-v1",doc:"book-reading",hasCards:true,loading:{}},
+  ln:{k:"ln",name:"Lecture Notes",M:window.MANIFEST_LN,pd:"PHASE_DATA_LN",dir:"data/ln/",img:"img/ln/p",unit:"Chapter",key:"ln-reading-v1",doc:"ln-reading",hasCards:false,loading:{}}
+};
+Object.keys(BOOKS).forEach(function(k){var b=BOOKS[k];b.CHBY={};b.M.chapters.forEach(function(c){b.CHBY[c.n]=c;});});
+var B=BOOKS.cb, M=B.M, PH=M.phases, CHALL=M.chapters, CHBY=B.CHBY, V="cb";
+var PAGES=[],CH=[],CARDS=[],FIRST=1,LAST=1,CUR=1,BYP={};
+var OLDKEY="phase4-reading-v1";
+var PLAN=[["cb", 19, "Now", "System GMM (estimation)", 3, "Prerequisites for Phase 4: algebra and asymptotics", "Primer for IV and GMM. Skip only if the algebra is already fluent."], ["cb", 20, "Now", "System GMM (estimation)", 3, "Wooldridge Ch. 5: IV and 2SLS", "Instruments in the simple case, before GMM."], ["cb", 21, "Now", "System GMM (estimation)", 3, "Wooldridge Ch. 8: System IV and GMM", "Bridge from 2SLS to system estimators."], ["cb", 22, "Now", "System GMM (estimation)", 3, "Wooldridge Ch. 14: GMM", "General GMM theory."], ["cb", 23, "Now", "System GMM (estimation)", 3, "Dynamic panels", "Sets up the lagged-dependent-variable problem that System GMM addresses."], ["cb", 24, "Now", "System GMM (estimation)", 3, "Blundell–Bond (1998)", "Your planned estimator."], ["cb", 25, "Now", "System GMM (estimation)", 3, "Roodman (2009): Instruments", "Likely viva target: the choice and number of instruments. Notes used general knowledge for this source, so check it against the paper."], ["cb", 26, "Now", "System GMM (estimation)", 6, "Synthesis of Phase 4 (outline and test)", "Test yourself before moving on."], ["cb", 1, "Next", "Minsky and SFC theory", 7, "Orientation: why these readings, and the Minsky question", "Short. Explains how Phase 1 fits the thesis and sets up the Minsky decision (you chose the fuller version)."], ["cb", 5, "Next", "Minsky and SFC theory", 4, "Minsky (1992): The Financial Instability Hypothesis", "Core of the stock-flow consistent model. Watch the tension: Minsky does not rely on exogenous shocks, but a climate-policy shock is partly exogenous."], ["cb", 6, "Next", "Minsky and SFC theory", 6, "Phase 1 synthesis (esp. §6.3 Minsky part, §6.4 framing note)", "§6.4 covers defending Post-Keynesian ideas alongside neoclassical tools, a likely examiner line of attack."], ["cb", 12, "Next", "Minsky and SFC theory", 4, "Lavoie (2014) Ch. 4: Credit, money and central banks", "Bank liquidity, solvency and capital adequacy from the Post-Keynesian side. Useful for the SFC model."], ["cb", 7, "Next", "Framing and viva", 4, "Stiglitz and Weiss (1981): Credit rationing", "The information-economics half of the framework. Pair with Minsky for the 'eclectic framework' defence."], ["ln", 4, "Next", "Capital adequacy and credit risk", 4, "Layer 3: Bank capital, credit risk and the Indian banking system", "Basel and RBI capital rules. The notes say the RBI circular has since been replaced, so re-check Indian thresholds."], ["cb", 27, "Next", "Capital adequacy and credit risk", 5, "Prerequisites for Phase 5", "Primer for the credit-risk chapters."], ["cb", 28, "Next", "Capital adequacy and credit risk", 3, "Merton's structural model", "PD from asset values. Notes followed Merton through McNeil et al., not the 1974 paper."], ["cb", 32, "Next", "Capital adequacy and credit risk", 3, "Portfolio credit risk and the Basel formula", "Overlaps LN 4 on the IRB formula. Read this one for the derivation."], ["cb", 33, "Next", "Capital adequacy and credit risk", 3, "Risk measures: VaR and expected shortfall", "Needed before CVaR."], ["ln", 7, "Next", "Climate stress testing", 4, "Layer 6: Climate finance, central banks and climate stress testing", "Main literature map for the stress-testing phase."], ["cb", 35, "Next", "Climate stress testing", 5, "Prerequisites for Phase 6", "Primer for the stress-testing chapters."], ["cb", 36, "Next", "Climate stress testing", 4, "STAMP€: the framework", "Notes cover STAMP€ Ch. 1–4 only; Ch. 5–13 were not studied."], ["cb", 37, "Next", "Climate stress testing", 3, "STAMP€ PD models", "Macro-to-PD modelling."], ["cb", 38, "Next", "Climate stress testing", 3, "STAMP€: NPL flows and LGD", "NPL and LGD side of the stress test."], ["cb", 40, "Next", "Climate stress testing", 5, "NGFS climate scenarios", "Scenario families you will calibrate against. Built from public web material, so check figures against the originals."], ["cb", 41, "Next", "Climate stress testing", 3, "Climate VaR (Dietz et al.)", "Built from public web material, not the paper itself. Verify figures."], ["cb", 39, "Next", "Climate stress testing", 3, "SRISK: capital shortfall in a crisis", "Capital shortfall measure, close to the capital-adequacy question."], ["cb", 42, "Next", "Climate stress testing", 6, "Synthesis of Phase 6", "Ties the stress-testing chain together."], ["ln", 2, "Next", "Physical risk component", 5, "Layer 1: Climate science and scenarios", "Needed for the physical-risk component. If unfamiliar, read primer §1.2 (LN 1, pp. 2–4) first."], ["cb", 4, "Later", "Framing and viva", 5, "Keynes (1937): The General Theory of Employment", "Uncertainty framing for the theory chapter. The notes say it is needed under either Minsky option."], ["cb", 2, "Later", "Framing and viva", 5, "Knight (1921) Ch. VII: Risk and uncertainty", "Risk versus uncertainty definition."], ["cb", 3, "Later", "Framing and viva", 5, "Knight (1921) Ch. VIII: Meeting uncertainty", "Institutions that deal with uncertainty. Read by OCR, so a stray character is possible."], ["cb", 14, "Later", "Climate economics", 4, "Stern Review Ch. 2: Ethics, discounting, risk", "Overlaps LN 3 (Layer 2). Read these CB chapters or LN 3, not both in full."], ["cb", 15, "Later", "Climate economics", 4, "Stern Review: postscript and sensitivity tables", "Sensitivity of results to discounting choices."], ["cb", 16, "Later", "Climate economics", 4, "Weitzman (2009): Catastrophic climate change", "Fat-tail risk, relevant to how far scenarios capture the tail."], ["cb", 17, "Later", "Climate economics", 4, "Dietz and Stern (2015)", "Notes used a web summary only. Check against the paper."], ["cb", 18, "Later", "Climate economics", 6, "Synthesis: four readings, one debate", "Wraps up the climate-economics debate."], ["cb", 29, "Later", "Capital adequacy and credit risk", 3, "Hazard-rate models, bonds and CDS", "Alternative PD approach."], ["cb", 30, "Later", "Capital adequacy and credit risk", 4, "Altman (1968): the Z-score", "Classic accounting-based score."], ["cb", 31, "Later", "Capital adequacy and credit risk", 4, "Altman, Hartzell and Peck: the EM score", "Emerging-market scoring, relevant to your emerging-market argument."], ["cb", 34, "Later", "Capital adequacy and credit risk", 6, "Synthesis of Phase 5", "Pulls the credit-risk chapters together."], ["ln", 5, "Later", "Climate stress testing", 4, "Layer 4: Financial contagion and systemic risk", "Network contagion (Eisenberg–Noe) for bank interlinkages. Read by OCR."], ["ln", 6, "Later", "Survey evidence (Objective 5)", 4, "Layer 5: Asset pricing, event studies and survey evidence", "Includes Stroebel and Wurgler (2021) survey evidence, relevant to the expert-survey objective."], ["cb", 8, "Later", "Framing and viva", 4, "Tirole (2006) Ch. 3: Outside financing capacity", "Information economics, second view on credit rationing."], ["cb", 13, "Later", "Framing and viva", 6, "Phase 2 synthesis (outline and test)", "Positioning the thesis among the schools of thought."], ["ln", 8, "Later", "Framing and viva", 5, "Layer 7: Research paradigms and the philosophy of economics", "Viva defence of the methodological stance. Lawson is a 39-page excerpt only."], ["ln", 3, "Optional", "Climate economics", 4, "Layer 2: Climate economics and discounting", "Overlaps CB 14–18. Use it if you prefer this version."], ["ln", 1, "Optional", "Background", 6, "Prerequisites chapter (primer for all layers)", "Dip in by section only where a gap shows."], ["cb", 9, "Optional", "Background", 5, "Fama (1970): Efficient capital markets", "General background."], ["cb", 10, "Optional", "Background", 5, "Stiglitz (2011): Rethinking macroeconomics", "General background."], ["cb", 11, "Optional", "Background", 5, "Lavoie (2014) Ch. 1–2: What is Post-Keynesian economics?", "General background. Partly read by OCR."]];
 function phaseOf(p){for(var i=0;i<PH.length;i++){if(p>=PH[i].start&&p<=PH[i].end)return PH[i].n;}return 1;}
-var loadedPh={};
 function ensurePhase(n,cb){
-  if(window.PHASE_DATA&&window.PHASE_DATA[n]){cb();return;}
-  if(loadedPh[n]){loadedPh[n].push(cb);return;}
-  loadedPh[n]=[cb];
-  var sc=document.createElement("script");sc.src="data/phase"+n+".js";
-  sc.onload=function(){var q=loadedPh[n];loadedPh[n]=null;q.forEach(function(f){f();});};
-  sc.onerror=function(){loadedPh[n]=null;toast("Could not load Phase "+n+". Check your connection and try again.");};
+  var lp=B.loading,pd=B.pd;
+  if(window[pd]&&window[pd][n]){cb();return;}
+  if(lp[n]){lp[n].push(cb);return;}
+  lp[n]=[cb];
+  var sc=document.createElement("script");sc.src=B.dir+"phase"+n+".js";
+  sc.onload=function(){var q=lp[n];lp[n]=null;q.forEach(function(f){f();});};
+  sc.onerror=function(){lp[n]=null;toast("Could not load "+B.unit+" "+n+". Check your connection and try again.");};
   document.head.appendChild(sc);
 }
 function applyPhase(n){
-  var ph=PH[n-1],D=window.PHASE_DATA[n];CUR=n;PAGES=D.pages;CARDS=D.cards;
+  var ph=PH[n-1],D=window[B.pd][n];CUR=n;PAGES=D.pages;CARDS=D.cards;
   CH=CHALL.filter(function(c){return c.phase===n;});FIRST=ph.start;LAST=ph.end;
   BYP={};PAGES.forEach(function(p){BYP[p.printed]=p;});applyAccent();
 }
@@ -240,7 +301,7 @@ var PALL=[["#8E1B3A","#FFFFFF"],["#E8502F","#FFFFFF"],["#F2B134","#241B3B"],["#0
 var PALD=[["#E8708B","#1B1230"],["#FF8A65","#1B1230"],["#F2C14E","#1B1230"],["#4FD1C5","#1B1230"],["#A99BFF","#1B1230"],["#F472B6","#1B1230"]];
 function isDark(){var t=document.documentElement.getAttribute("data-theme");return t?t==="dark":window.matchMedia("(prefers-color-scheme:dark)").matches;}
 function pal(n){return (isDark()?PALD:PALL)[(n-1)%6];}
-function applyAccent(){var c=pal(CUR),r=document.documentElement.style;r.setProperty("--accent",c[0]);r.setProperty("--accent-ink",c[1]);}
+function applyAccent(){var c=V==="plan"?pal(5):pal(CUR),r=document.documentElement.style;r.setProperty("--accent",c[0]);r.setProperty("--accent-ink",c[1]);}
 function phasePct(n){var ph=PH[n-1],r=0,t=ph.end-ph.start+1;for(var p=ph.start;p<=ph.end;p++){if(S.read[p])r++;}return t?r/t:0;}
 function resumeOf(n){var ph=PH[n-1];for(var p=ph.start;p<=ph.end;p++){if(!S.read[p])return p;}return ph.start;}
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
@@ -248,15 +309,16 @@ function $(id){return document.getElementById(id);}
 function today(){return new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10);}
 
 /* ---------- state ---------- */
-var S={v:1,read:{},notes:{},marks:{},hl:{},bm:[],mins:{},last:1,set:{auto:true,view:"page",zoom:1,night:false,hc:0,compact:null,focus:false}};
+var ST={cb:null,ln:null},S;
 var U={sw:false,tab:"notes",q:"",qi:0,qf:"all",reveal:false,open:{},qmode:"quiz"};
-var ref=null, saveT=null, status="local";
+var saveT=null, status="local";
 function normalize(d){
-  d=d||{}; var o={v:1,read:d.read||{},notes:d.notes||{},marks:d.marks||{},hl:d.hl||{},bm:d.bm||[],mins:d.mins||{},last:d.last||1,set:Object.assign({auto:true,view:"page",zoom:1,night:false,hc:0,compact:null,focus:false},d.set||{})};
+  d=d||{}; var o={v:1,read:d.read||{},notes:d.notes||{},marks:d.marks||{},hl:d.hl||{},bm:d.bm||[],mins:d.mins||{},last:d.last||1,set:Object.assign({auto:true,view:"page",zoom:1,night:false,hc:0,compact:null,focus:false,book:"cb",rb:"cb"},d.set||{})};
   return o;
 }
-function localLoad(){try{var t=localStorage.getItem(KEY)||localStorage.getItem(OLDKEY);return t?JSON.parse(t):null;}catch(e){return null;}}
-function localSave(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+function localLoad(b){try{var t=localStorage.getItem(b.key)||(b.k==="cb"?localStorage.getItem(OLDKEY):null);return t?JSON.parse(t):null;}catch(e){return null;}}
+function localSave(){Object.keys(BOOKS).forEach(function(k){try{localStorage.setItem(BOOKS[k].key,JSON.stringify(ST[k]));}catch(e){}});}
+function linkSet(){ST.ln.set=ST.cb.set;}
 function merge(a,b){ /* a = local, b = cloud: keep newest per item */
   var o=normalize(a);
   Object.keys(b.read||{}).forEach(function(k){o.read[k]=Math.max(o.read[k]||0,b.read[k]);});
@@ -270,8 +332,9 @@ function merge(a,b){ /* a = local, b = cloud: keep newest per item */
 }
 function setStatus(s){status=s;var e=$("savetxt");if(e){e.textContent=s==="account"?"Saved to your account":s==="saving"?"Saving…":"Saved in this browser";e.parentNode.className="save "+(s==="account"?"acc":"");}}
 function save(){localSave(); if(saveT)clearTimeout(saveT); saveT=setTimeout(function(){
-  if(!ref)return; setStatus("saving");
-  Promise.resolve().then(function(){return ref.set(JSON.parse(JSON.stringify(S)));}).then(function(){setStatus("account");}).catch(function(){setStatus("local");});
+  var jobs=[];Object.keys(BOOKS).forEach(function(k){var b=BOOKS[k];if(b.ref)jobs.push(Promise.resolve().then(function(){return b.ref.set(JSON.parse(JSON.stringify(ST[k])));}));});
+  if(!jobs.length)return; setStatus("saving");
+  Promise.all(jobs).then(function(){setStatus("account");}).catch(function(){setStatus("local");});
 },1500);}
 function unwrap(snap){ if(!snap)return null; try{ if(typeof snap.exists==="function"&&!snap.exists())return null; if(snap.exists===false)return null; if(typeof snap.data==="function")return snap.data(); if(snap.data!==undefined)return snap.data; }catch(e){} return snap; }
 function initCloud(){
@@ -279,13 +342,17 @@ function initCloud(){
   Promise.all([window.claude.use("user"),window.claude.use("db")]).then(function(r){
     var user=r[0],db=r[1]; if(!user||!db||!user.id)return;
     return Promise.resolve(user.id()).then(function(id){
-      if(!id)return; var rr=db.collection("data/users/"+id).doc("book-reading"),lg=db.collection("data/users/"+id).doc("phase4-reading");
-      var t=new Promise(function(_,rej){setTimeout(function(){rej(new Error("timeout"));},10000);});
-      return Promise.race([Promise.all([rr.get(),lg.get().catch(function(){return null;})]),t]).then(function(sn){
-        var d=unwrap(sn[0]),d0=unwrap(sn[1]); if(d0&&d0.v===1){S=merge(S,d0);} if(d&&d.v===1){S=merge(S,d);} ref=rr; localSave(); setStatus("account"); renderAll(); save();
+      if(!id)return; var col=db.collection("data/users/"+id);
+      var jobs=Object.keys(BOOKS).map(function(k){
+        var b=BOOKS[k],rr=col.doc(b.doc),lg=k==="cb"?col.doc("phase4-reading"):null;
+        var t=new Promise(function(_,rej){setTimeout(function(){rej(new Error("timeout"));},10000);});
+        return Promise.race([Promise.all([rr.get().catch(function(){return null;}),lg?lg.get().catch(function(){return null;}):null]),t]).then(function(sn){
+          var d=unwrap(sn[0]),d0=unwrap(sn[1]); if(d0&&d0.v===1){ST[k]=merge(ST[k],d0);} if(d&&d.v===1){ST[k]=merge(ST[k],d);} b.ref=rr;
+        });
       });
+      return Promise.all(jobs).then(function(){linkSet();S=ST[B.k];localSave();setStatus("account");renderAll();save();});
     });
-  }).catch(function(){ref=null;setStatus("local");});
+  }).catch(function(){Object.keys(BOOKS).forEach(function(k){BOOKS[k].ref=null;});setStatus("local");});
 }
 
 /* ---------- derived numbers ---------- */
@@ -316,38 +383,87 @@ function toast(t){var e=$("toast");e.textContent=t;e.className="toast on";clearT
 /* ---------- render: top ---------- */
 function cmpState(){return S.set.compact===null?window.innerHeight<900:S.set.compact;}
 function bookRead(){return Object.keys(S.read).length;}
+function bookPct(k){return Object.keys(ST[k].read).length/BOOKS[k].M.last;}
+function planInfo(it){var k=it[0],b=BOOKS[k],c=b.CHBY[it[1]],pages=c.end-c.start+1,r=0,rd=ST[k].read;for(var p=c.start;p<=c.end;p++){if(rd[p])r++;}
+  return {k:k,n:it[1],stage:it[2],grp:it[3],pace:it[4],title:it[5],why:it[6],c:c,pages:pages,read:r,hours:pages/it[4],ref:(k==="cb"?"CB ":"LN ")+it[1]};}
+function planAll(){return PLAN.map(planInfo);}
+function planPct(){var t=0,r=0;planAll().forEach(function(x){t+=x.pages;r+=x.read;});return t?r/t:0;}
+function booksNav(){return '<div class="books" role="tablist" aria-label="Book">'+[["cb","Complete Book"],["ln","Lecture Notes"],["plan","Reading plan"]].map(function(x){var sm=x[0]==="plan"?Math.round(planPct()*100)+'% of plan':Math.round(bookPct(x[0])*100)+'% read';return '<button class="btab" role="tab" data-book="'+x[0]+'" aria-selected="'+(V===x[0])+'">'+x[1]+' <small>'+sm+'</small></button>';}).join("")+'</div>';}
+function saveTxt(){return status==="account"?"Saved to your account":(window.claude&&window.claude.use?"Saved in this browser only":"Saved in this browser");}
+function ringHtml(pct,label,sub){var c=2*Math.PI*30,off=c*(1-pct);return '<div class="stat ringstat"><svg class="ring" viewBox="0 0 72 72" role="img" aria-label="'+Math.round(pct*100)+' percent"><circle class="bg" cx="36" cy="36" r="30"/><circle class="fg" cx="36" cy="36" r="30" stroke-dasharray="'+c.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'" transform="rotate(-90 36 36)"/><text x="36" y="42" text-anchor="middle">'+Math.round(pct*100)+'%</text></svg><div><b class="num">'+label+'</b><small>'+sub+'</small></div></div>';}
 function renderTop(){
+  var nav=booksNav();
+  if(V==="plan"){
+    var its=planAll(),tp=0,tr=0,hl0=0,done=0;its.forEach(function(x){tp+=x.pages;tr+=x.read;hl0+=x.hours*(1-x.read/x.pages);if(x.read>=x.pages)done++;});
+    var nx=null;its.forEach(function(x){if(!nx&&x.read<x.pages)nx=x;});
+    $("top").innerHTML=nav+'<div class="top-head"><div><div class="eyebrow">Reading plan · Complete Book + Lecture Notes</div><h1>The order to read</h1><div class="sub">'+its.length+' chapters in four steps, from the System GMM block you need now to optional background. Progress comes from the pages you mark as read in each book.</div></div>'+
+     '<div class="top-actions"><span class="save"><i></i><span id="savetxt">'+saveTxt()+'</span></span><button class="btn" id="theme" title="Switch light or dark">Theme</button>'+(nx?'<button class="btn primary" data-plango="'+nx.k+':'+nx.n+'">Continue with '+nx.ref+'</button>':'')+'</div></div>'+
+     '<div class="stats">'+ringHtml(tp?tr/tp:0,'Plan','of planned pages read')+'<div class="stat"><b class="num">'+done+' / '+its.length+'</b><small>chapters finished</small></div><div class="stat"><b class="num">'+tr+' / '+tp+'</b><small>pages read</small></div><div class="stat"><b class="num">'+fmtH(hl0)+'</b><small>left at plan pace</small></div></div>';
+    return;
+  }
   var n=PAGES.length,r=totalRead(),pct=n?r/n:0,hl=hoursLeft(),ht=hoursTotal();
   var all=CARDS,rt=rated(all),ms=mastery(all);
-  var c=2*Math.PI*30,off=c*(1-pct);
   var days=lastDays(7),mx=Math.max.apply(null,days.map(function(d){return d[1];}).concat([10]));
   var tm=S.mins[today()]||0, studied=Object.keys(S.mins).filter(function(k){return S.mins[k]>=1;}).length;
-  var strip=CH.map(function(ch){var np=ch.end-ch.start+1,rr=chRead(ch.n),pp=np?rr/np:0;
-    return '<button class="chip'+(chOf(S.last)===ch.n?' on':'')+'" data-go="'+ch.start+'" title="'+esc(ch.title)+'"><span class="t"><span>Ch. '+ch.n+'</span><span class="num">'+Math.round(pp*100)+'%</span></span><span class="meter"><i style="width:'+(pp*100)+'%"></i></span></button>';}).join("");
-  var phstrip=PH.map(function(ph){var pp=phasePct(ph.n);return '<button class="chip'+(CUR===ph.n?' on':'')+'" data-phase="'+ph.n+'" style="--c:'+pal(ph.n)[0]+';--ci:'+pal(ph.n)[1]+'" title="'+esc(ph.title)+'"><span class="t"><span>Phase '+ph.n+'</span><span class="num">'+Math.round(pp*100)+'%</span></span><span class="meter"><i style="width:'+(pp*100)+'%"></i></span></button>';}).join("");
+  var phstrip=PH.map(function(ph){var pp=phasePct(ph.n);return '<button class="chip'+(CUR===ph.n?' on':'')+'" data-phase="'+ph.n+'" style="--c:'+pal(ph.n)[0]+';--ci:'+pal(ph.n)[1]+'" title="'+esc(ph.title)+'"><span class="t"><span>'+(B.k==="ln"&&ph.n===9?'Back':B.unit+' '+ph.n)+'</span><span class="num">'+Math.round(pp*100)+'%</span></span><span class="meter"><i style="width:'+(pp*100)+'%"></i></span></button>';}).join("");
   var bars=days.map(function(d){return '<span class="'+(d[1]<=0?'z':'')+'" style="height:'+Math.max(2,Math.round(d[1]/mx*26))+'px" title="'+d[0]+': '+Math.round(d[1])+' min"></span>';}).join("");
-  $("top").innerHTML=
-   '<div class="top-head"><div><div class="eyebrow">Complete Book · Phase '+CUR+' of '+PH.length+' · printed pp. '+FIRST+'–'+LAST+'</div><h1>'+esc(PH[CUR-1].title)+'</h1><div class="sub">Chapters '+CH[0].n+'–'+CH[CH.length-1].n+' · Plan estimate '+ht.toFixed(1)+' h · whole book: '+bookRead()+' of '+M.last+' pages read</div></div>'+
-   '<div class="top-actions"><span class="save"><i></i><span id="savetxt">'+(status==="account"?"Saved to your account":(window.claude&&window.claude.use?"Saved in this browser only":"Saved in this browser"))+'</span></span><button class="btn" id="cmp" title="Hide or show the progress numbers">'+(cmpState()?"Show stats":"Compact")+'</button><button class="btn" id="theme" title="Switch light or dark">Theme</button><button class="btn primary" data-go="'+S.last+'">Continue at p. '+S.last+'</button></div></div>'+
+  $("top").innerHTML=nav+
+   '<div class="top-head"><div><div class="eyebrow">'+esc(B.name)+' · '+B.unit+' '+CUR+' of '+PH.length+' · printed pp. '+FIRST+'–'+LAST+'</div><h1>'+esc(PH[CUR-1].title)+'</h1><div class="sub">'+(CH.length>1?'Chapters '+CH[0].n+'–'+CH[CH.length-1].n:'Chapter '+CH[0].n)+' · Plan estimate '+ht.toFixed(1)+' h · whole book: '+Object.keys(S.read).length+' of '+M.last+' pages read</div></div>'+
+   '<div class="top-actions"><span class="save"><i></i><span id="savetxt">'+saveTxt()+'</span></span><button class="btn" id="cmp" title="Hide or show the progress numbers">'+(cmpState()?"Show stats":"Compact")+'</button><button class="btn" id="theme" title="Switch light or dark">Theme</button><button class="btn primary" data-go="'+S.last+'">Continue at p. '+S.last+'</button></div></div>'+
    (cmpState()?'':'<div class="stats">'+
-    '<div class="stat ringstat"><svg class="ring" viewBox="0 0 72 72" role="img" aria-label="'+Math.round(pct*100)+' percent of pages read"><circle class="bg" cx="36" cy="36" r="30"/><circle class="fg" cx="36" cy="36" r="30" stroke-dasharray="'+c.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'" transform="rotate(-90 36 36)"/><text x="36" y="42" text-anchor="middle">'+Math.round(pct*100)+'%</text></svg><div><b class="num">Phase '+CUR+'</b><small>of pages read</small></div></div>'+
+    ringHtml(pct,B.unit+' '+CUR,'of pages read')+
     '<div class="stat"><b class="num">'+r+' / '+n+'</b><small>pages read</small></div>'+
     '<div class="stat"><b class="num">'+fmtH(hl)+'</b><small>left at Plan pace</small></div>'+
-    '<div class="stat"><b class="num">'+Math.round(ms*100)+'%</b><small>self-check · '+rt+' of '+all.length+' rated</small></div>'+
+    (B.hasCards?'<div class="stat"><b class="num">'+Math.round(ms*100)+'%</b><small>self-check · '+rt+' of '+all.length+' rated</small></div>':'')+
     '<div class="stat"><b class="num">'+Math.round(tm)+' min</b><small>today · '+studied+' day'+(studied===1?'':'s')+' studied</small><div class="bars7" aria-label="Minutes studied, last 7 days">'+bars+'</div></div>'+
    '</div>')+
-   '<div class="strip phs" aria-label="Phases">'+phstrip+'</div>';
+   '<div class="strip phs" style="--np:'+PH.length+'" aria-label="'+B.unit+'s">'+phstrip+'</div>';
 }
 
-/* ---------- render: rail ---------- */
+/* ---------- render: rail (slim sidebar) ---------- */
 function renderRail(){
-  var cur=S.last,curCh=chOf(cur),ch=CHBY[curCh];
-  var h='<div class="chrow"><button class="cchip'+(cur===FIRST?' on':'')+'" data-go="'+FIRST+'" title="Phase opener"><span class="t"><span>Opener</span></span><span class="meter"><i style="width:'+(isRead(FIRST)?100:0)+'%"></i></span></button>'+CH.map(function(c){var np=c.end-c.start+1,pp=chRead(c.n)/np;return '<button class="cchip'+(c.n===curCh?' on':'')+'" data-go="'+c.start+'" title="'+esc(c.n+' · '+c.title)+'"><span class="t"><span>Ch. '+c.n+'</span><span class="num">'+Math.round(pp*100)+'%</span></span><span class="meter"><i style="width:'+(pp*100)+'%"></i></span></button>';}).join("")+'</div>';
-  if(ch){var cs=cardsOf(ch.n),ms=Math.round(mastery(cs)*100);
-    h+='<div class="chinfo"><b>'+ch.n+' · '+esc(ch.title)+'</b><span class="muted num">pp. '+ch.start+'–'+ch.end+' · '+fmtH(ch.hours)+' · '+chRead(ch.n)+'/'+(ch.end-ch.start+1)+' read · self-check '+ms+'%</span></div><div class="secrow" id="secrow">'+ch.sections.map(function(s,i){var pc=secPct(ch.n,i),st=pc>=1?'done':pc>0?'part':'',sp=secSpan(ch.n,i);return '<button class="spill'+(cur>=sp[0]&&cur<=sp[1]?' here':'')+'" data-go="'+s.page+'"><span class="dot '+st+'"></span><span>'+esc((s.num?s.num+' ':'')+s.title)+'</span><span class="pg">p. '+s.page+'</span></button>';}).join("")+'</div>';
-  } else h+='<div class="chinfo"><b>Phase '+CUR+' opener</b></div>';
-  $("rail").innerHTML=h;
-  var row=$("secrow"),here=row&&row.querySelector(".here"); if(here)row.scrollLeft=Math.max(0,here.offsetLeft-row.offsetLeft-24);
+  var cur=S.last,curCh=chOf(cur);
+  var h='<div class="row" style="justify-content:space-between"><h2>Contents</h2><span class="muted num">'+PAGES.length+' pp.</span></div><div class="chaps">';
+  if(!chOf(FIRST))h+='<div class="chap"><button class="sec'+(cur===FIRST?' here':'')+'" data-go="'+FIRST+'"><span class="dot '+(isRead(FIRST)?'done':'')+'"></span><span>'+B.unit+' '+CUR+' opener</span><span class="pg">p. '+FIRST+'</span></button></div>';
+  CH.forEach(function(ch){
+    var np=ch.end-ch.start+1, rr=chRead(ch.n), open=U.open[ch.n]||curCh===ch.n&&U.open[ch.n]!==false;
+    var cs=cardsOf(ch.n),ms=Math.round(mastery(cs)*100);
+    h+='<div class="chap"><button class="chap-h" data-tog="'+ch.n+'" aria-expanded="'+(open?'true':'false')+'"><span class="l1"><span>'+ch.n+' · '+esc(ch.title)+'</span><span class="num">'+rr+'/'+np+'</span></span><span class="meter"><i style="width:'+(rr/np*100)+'%"></i></span><span class="l2 num">pp. '+ch.start+'–'+ch.end+' · '+fmtH(ch.hours)+(B.hasCards?' · self-check '+ms+'%':'')+'</span></button>';
+    if(open){h+='<ul class="secs">';ch.sections.forEach(function(s,i){
+      var pc=secPct(ch.n,i), st=pc>=1?'done':pc>0?'part':'', sp=secSpan(ch.n,i), here=s.page<=cur&&(i+1>=ch.sections.length||ch.sections[i+1].page>cur);
+      var label=(s.num?s.num+' ':'')+s.title;
+      h+='<li><button class="sec'+(here?' here':'')+'" data-go="'+s.page+'"><span class="dot '+st+'"></span><span>'+esc(label)+'</span><span class="pg">p. '+s.page+'</span></button></li>';});
+      h+='</ul>';}
+    h+='</div>';});
+  var rl=$("rail");rl.innerHTML=h+'</div>';
+  var hr=rl.querySelector(".sec.here");if(hr&&rl.scrollHeight>rl.clientHeight)rl.scrollTop=Math.max(0,hr.offsetTop-rl.clientHeight/2);
+}
+
+/* ---------- render: plan ---------- */
+function renderPlan(){
+  var its=planAll(),stages=[["Now","Step 1 · Start here","Estimation is your next thesis step. The Complete Book's Phase 4 builds System GMM from instruments up to Blundell–Bond and Roodman."],
+   ["Next","Step 2 · Core chapters","Theory behind the model, capital adequacy and credit risk, climate stress testing, and the physical-risk component."],
+   ["Later","Step 3 · Fill the gaps","Framing for the viva, climate economics, credit scoring, contagion, event studies and survey evidence."],
+   ["Optional","Optional · Background","Overlapping or general background. Dip in only where a gap shows."]];
+  var nx=null,rest=[];its.forEach(function(x){if(x.read<x.pages){if(!nx)nx=x;else if(rest.length<3)rest.push(x);}});
+  var h='';
+  if(nx){h+='<div class="pnext"><div class="eyebrow">Up next</div><h2>'+esc(nx.ref+' · '+nx.title)+'</h2><div class="muted num">pp. '+nx.c.start+'–'+nx.c.end+' · '+nx.pages+' pages · '+fmtH(nx.hours)+' at plan pace · '+nx.read+' read · '+esc(nx.grp)+'</div><p class="pwhy" style="color:var(--ink)">'+esc(nx.why)+'</p><div class="row"><button class="btn primary" data-plango="'+nx.k+':'+nx.n+'">'+(nx.read?'Continue':'Start')+' reading</button></div>'+(rest.length?'<div class="then muted">After that: '+rest.map(function(x){return '<span class="pill">'+esc(x.ref)+'</span>';}).join(' ')+'</div>':'')+'</div>';}
+  else h+='<div class="pnext"><h2>Plan finished</h2><p class="pwhy">Every chapter in the plan is marked read. Use the Self-check tab to revisit weak spots.</p></div>';
+  h+='<div class="row" style="justify-content:flex-end"><label class="muted" style="display:inline-flex;gap:6px;align-items:center"><input type="checkbox" id="hd" '+(U.hideDone?'checked':'')+'> Hide finished chapters</label></div>';
+  var seq=0;
+  stages.forEach(function(sg){
+    var list=its.filter(function(x){return x.stage===sg[0];}); if(!list.length)return;
+    var tp=0,tr=0,hh=0;list.forEach(function(x){tp+=x.pages;tr+=x.read;hh+=x.hours;});
+    h+='<section class="card pstage"><div class="pst-h"><h2>'+sg[1]+'</h2><span class="muted num">'+list.length+' chapters · '+tp+' pages · about '+fmtH(hh)+' · '+Math.round(tr/tp*100)+'% read</span></div><div class="muted">'+sg[2]+'</div><div class="meter" style="margin-top:6px"><i style="width:'+(tr/tp*100)+'%"></i></div>';
+    var lastG=null;
+    list.forEach(function(x){seq++;var done=x.read>=x.pages; if(U.hideDone&&done)return;
+      if(x.grp!==lastG){h+='<div class="pgrp">'+esc(x.grp)+'</div>';lastG=x.grp;}
+      var pc=Math.round(x.read/x.pages*100);
+      h+='<div class="prow'+(done?' done':'')+'"><span class="pn">'+seq+'</span><div class="pbody"><div class="ptitle"><span class="bk bk-'+x.k+'">'+x.ref+'</span><b>'+esc(x.title)+'</b></div><div class="muted num">pp. '+x.c.start+'–'+x.c.end+' · '+x.pages+' pages · '+fmtH(x.hours)+'</div><div class="meter"><i style="width:'+pc+'%"></i></div><p class="pwhy">'+esc(x.why)+'</p></div><div class="pact"><span class="pp num">'+(done?'✓ Done':pc+'%')+'</span><button class="btn sm'+(done?'':' primary')+'" data-plango="'+x.k+':'+x.n+'">'+(done?'Review':x.read?'Continue':'Start')+'</button></div></div>';});
+    h+='</section>';
+  });
+  h+='<details class="how card" style="padding:12px 16px"><summary>About overlaps and what is not in the plan</summary><p>Lecture Notes chapter 4 and Complete Book chapter 32 both cover the IRB formula, so read one in depth. Lecture Notes chapter 3 overlaps Complete Book chapters 14 to 18 on climate economics; the plan puts the Complete Book chapters first and keeps chapter 3 optional. Complete Book numbers are its own chapter numbers (1 to 42). Lecture Notes numbers follow its contents, so LN 2 is Layer 1 and LN 4 is Layer 3.</p></details>';
+  $("plan").innerHTML=h;
 }
 
 /* ---------- render: reader ---------- */
@@ -378,6 +494,7 @@ function textHtml(pg){
   return out.join("\n");
 }
 function renderReader(){
+  if(V==="plan")return;
   document.body.classList.toggle("focus",!!S.set.focus);
   var p=S.last, pg=BYP[p], ch=CHBY[pg.ch], v=S.set.view, wide=window.innerWidth>=1000, rd=isRead(p), bm=S.bm.indexOf(p)>=0;
   var so=sectionsOn(p), chips='';
@@ -385,7 +502,7 @@ function renderReader(){
   so.start.forEach(function(s){chips+='<span class="pill">'+esc((s.num?s.num+' ':'')+s.title)+'</span>';});
   var z=S.set.zoom, W=Math.round(980*z), wst=z>1?'width:'+W+'px':'width:min(100%,'+W+'px)';
   var rects=(S.hl[p]||[]).filter(function(h){return h.k==="r"&&!h.del;}).map(function(h){return '<i class="hr hc'+h.c+'" data-hid="'+h.id+'" style="left:'+h.x+'%;top:'+h.y+'%;width:'+h.w+'%;height:'+h.h+'%"></i>';}).join("");
-  var img='<div class="pagebox'+(S.set.night?' night':'')+(U.hm?' hm':'')+'"><div class="pimg" style="'+wst+'"><img src="img/p'+pg.pdf+'.webp" alt="Printed page '+p+' of the Complete Book, chapter '+(pg.ch||'opener')+'" width="1034" height="1463"><div class="hlayer" id="hlayer">'+rects+'</div></div></div>';
+  var img='<div class="pagebox'+(S.set.night?' night':'')+(U.hm?' hm':'')+'"><div class="pimg" style="'+wst+'"><img src="'+B.img+pg.pdf+'.webp" alt="Printed page '+p+' of the '+B.name+', chapter '+(pg.ch||'opener')+'" width="1034" height="1463"><div class="hlayer" id="hlayer">'+rects+'</div></div></div>';
   var txt='<div><p class="warnnote">Text view is machine-extracted. Equations, tables and figures can be garbled, so use Page view for anything mathematical. Select any text to highlight it.</p><div class="textbox" id="tb">'+textHtml(pg)+'</div></div>';
   var stage = v==="page"?img : v==="text"?txt : (wide? '<div class="stage two" style="padding:0;border:0">'+img+txt+'</div>' : img);
   var sws=U.hm?[0,1,2,3].map(function(i){return '<button class="sw hc'+i+(S.set.hc===i?' on':'')+'" data-hcset="'+i+'" aria-label="Highlight colour '+(i+1)+'"></button>';}).join(""):'';
@@ -394,7 +511,7 @@ function renderReader(){
    '<div class="pager"><button class="btn sm" id="pv" aria-label="Previous page" '+(p<=1?'disabled':'')+'>\u2190</button><input id="pj" type="text" inputmode="numeric" value="'+p+'" aria-label="Go to printed page"><span class="muted num">of '+M.last+'</span><button class="btn sm" id="nx" aria-label="Next page" '+(p>=M.last?'disabled':'')+'>\u2192</button></div>'+
    '<span class="sp"></span>'+
    '<button class="btn sm" id="fx" aria-pressed="'+!!S.set.focus+'" title="Hide the dashboard and contents to give the page more room">'+(S.set.focus?'Show header':'\u2922 Focus')+'</button><button class="btn sm primary" id="rd" aria-pressed="'+rd+'">'+(rd?'\u2713 Read':'Mark read')+'</button></div>'+
-   '<div class="where"><b>'+(ch?'Ch. '+ch.n+' · '+esc(ch.title):'Phase '+CUR+' opener')+'</b><span class="pill mute num">p. '+p+' · PDF '+pg.pdf+'</span>'+(rd?'<span class="pill read">Read</span>':'')+chips+
+   '<div class="where"><b>'+(ch?'Ch. '+ch.n+' · '+esc(ch.title):B.unit+' '+CUR+' opener')+'</b><span class="pill mute num">p. '+p+' · PDF '+pg.pdf+'</span>'+(rd?'<span class="pill read">Read</span>':'')+chips+
    '<span class="tools"><button class="btn sm" id="zo" aria-label="Zoom out">\u2212</button><span class="muted num">'+Math.round(S.set.zoom*100)+'%</span><button class="btn sm" id="zi" aria-label="Zoom in">+</button>'+
    '<button class="btn sm" id="night" aria-pressed="'+S.set.night+'" title="Invert page colours for night reading">Night</button>'+
    '<button class="btn sm" id="hm" aria-pressed="'+!!U.hm+'" title="Drag across the page to highlight it">\u270E Highlight</button>'+sws+
@@ -462,7 +579,7 @@ function renderSide(){
   } else if(t==="check"){
     h+=renderCheck();
   } else if(t==="find"){
-    h+='<label class="muted" style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="sw" '+(U.sw?'checked':'')+'> Search the whole book</label><input type="search" id="q" placeholder="Search '+(U.sw?'the whole book':'Phase '+CUR)+'" value="'+esc(U.q)+'" aria-label="Search the text">';
+    h+='<label class="muted" style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="sw" '+(U.sw?'checked':'')+'> Search the whole book</label><input type="search" id="q" placeholder="Search '+(U.sw?'the whole book':B.unit+' '+CUR)+'" value="'+esc(U.q)+'" aria-label="Search the text">';
     if(U.q.trim().length>1){
       var terms=U.q.toLowerCase().split(/\s+/).filter(Boolean),res=[];
       var pool=U.sw?allPages():PAGES;
@@ -471,7 +588,7 @@ function renderSide(){
     } else h+='<p class="muted">Type two or more letters. Results open that page and highlight the words in Text view.</p>';
   } else {
     var bms=S.bm.slice().sort(function(a,b){return a-b;});
-    h+='<div class="eyebrow">Bookmarks ('+bms.length+')</div><div class="list">'+(bms.length?bms.map(function(k){var s=sectionsOn(k),lab=s.start[0]||s.carry;return '<button class="item" data-go="'+k+'"><span class="m"><b>p. '+k+'</b><span>Ch. '+chOf(k)+'</span></span><p>'+esc(lab?(lab.num?lab.num+' ':'')+lab.title:'Phase '+CUR+' opener')+'</p></button>';}).join(""):'<p class="muted">Use \u2606 Bookmark in the page toolbar to save a place.</p>')+'</div>';
+    h+='<div class="eyebrow">Bookmarks ('+bms.length+')</div><div class="list">'+(bms.length?bms.map(function(k){var s=sectionsOn(k),lab=s.start[0]||s.carry;return '<button class="item" data-go="'+k+'"><span class="m"><b>p. '+k+'</b><span>Ch. '+chOf(k)+'</span></span><p>'+esc(lab?(lab.num?lab.num+' ':'')+lab.title:B.unit+' '+CUR+' opener')+'</p></button>';}).join(""):'<p class="muted">Use \u2606 Bookmark in the page toolbar to save a place.</p>')+'</div>';
     var hls=[];Object.keys(S.hl).forEach(function(k){S.hl[k].forEach(function(x){if(!x.del)hls.push({p:+k,h:x});});});hls.sort(function(a,b){return a.p-b.p||a.h.ts-b.h.ts;});
     h+='<div class="eyebrow">Highlights ('+hls.length+')</div><div class="list">'+(hls.length?hls.slice(0,120).map(function(x){return '<button class="item" data-go="'+x.p+'" '+(x.h.k==="t"?'data-text="1"':'data-page="1"')+'><span class="m"><b>p. '+x.p+'</b><span class="dotc hc'+x.h.c+'"></span></span><p>'+esc(x.h.k==="t"?x.h.q:"Marked area on the page")+'</p></button>';}).join(""):'<p class="muted">Press \u270E Highlight and drag across the page, or select text in Text view.</p>')+'</div>';
     var rs=Object.keys(S.read).map(Number).sort(function(a,b){return S.read[b]-S.read[a];}).slice(0,8);
@@ -480,11 +597,12 @@ function renderSide(){
   }
   $("side").innerHTML=h+'</div>';
 }
-function allPages(){var a=[];for(var n=1;n<=PH.length;n++){if(window.PHASE_DATA&&window.PHASE_DATA[n])a=a.concat(window.PHASE_DATA[n].pages);}return a;}
+function allPages(){var a=[];for(var n=1;n<=PH.length;n++){if(window[B.pd]&&window[B.pd][n])a=a.concat(window[B.pd][n].pages);}return a;}
 function notesListHtml(){var ks=Object.keys(S.notes).filter(function(k){return S.notes[k].t;}).map(Number).sort(function(a,b){return a-b;});return '<div><div class="eyebrow">All notes ('+ks.length+')</div><div class="list">'+(ks.length?ks.map(function(k){return '<button class="item" data-go="'+k+'"><span class="m"><b>p. '+k+'</b><span>Ch. '+chOf(k)+'</span></span><p>'+esc(S.notes[k].t.slice(0,140))+'</p></button>';}).join(""):'<p class="muted">No notes yet. Notes you write on a page show up here.</p>')+'</div></div>';}
 function curChap(){var c=chOf(S.last);return c||CH[0].n;}
 function deck(){var c=curChap(),l=cardsOf(c);if(U.qf==="todo")l=l.filter(function(x){return mval(x.id)!==2;});else if(U.qf!=="all")l=l.filter(function(x){return x.lv===U.qf;});return l;}
 function renderCheck(){
+  if(!B.hasCards)return '<p class="muted">This book has no question sets. For recall practice use each layer\'s \u201cMaster quotables\u201d and \u201cHow this feeds the thesis\u201d sections, and the Complete Book\'s Self-check cards.</p>';
   var c=curChap(),all=cardsOf(c),d=deck(),h='';
   var lvls=[]; all.forEach(function(x){if(lvls.indexOf(x.lv)<0)lvls.push(x.lv);});
   h+='<div class="row" style="justify-content:space-between"><div><div class="eyebrow">Chapter '+c+' self-check</div><div class="muted num">'+rated(all)+' of '+all.length+' rated · '+Math.round(mastery(all)*100)+'% mastery</div></div><button class="btn sm" data-go="'+(CHBY[c].chk||CHBY[c].start)+'" data-page="1">See the printed page</button></div>';
@@ -501,10 +619,26 @@ function renderCheck(){
 }
 
 /* ---------- wiring ---------- */
-function renderAll(){renderTop();renderRail();renderReader();renderSide();}
+function renderAll(){
+  var plan=V==="plan"; $("plan").hidden=!plan; document.querySelector(".cols").hidden=plan;
+  document.body.classList.toggle("focus",!plan&&!!S.set.focus); applyAccent();
+  renderTop(); if(plan){renderPlan();return;} renderRail();renderReader();renderSide();
+}
+function setBook(k,cb){B=BOOKS[k];M=B.M;PH=M.phases;CHALL=M.chapters;CHBY=B.CHBY;S=ST[k];CUR=0;PAGES=[];
+  var n=phaseOf(S.last);ensurePhase(n,function(){applyPhase(n);U.open={};U.open[chOf(S.last)]=true;U.qi=0;U.reveal=false;U.qf="all";U.q="";U.tab=U.tab==="check"&&!B.hasCards?"notes":U.tab;if(cb)cb();});}
+function showView(v){
+  var fin=function(){V=v;ST.cb.set.book=v;if(v!=="plan")ST.cb.set.rb=v;save();renderAll();window.scrollTo({top:0});};
+  if(v==="plan"||B.k===v)fin();else setBook(v,fin);
+}
+function openChapter(k,n){
+  var fin=function(){var c=B.CHBY[n],p=c.start;for(var q=c.start;q<=c.end;q++){if(!S.read[q]){p=q;break;}}V=k;ST.cb.set.book=k;ST.cb.set.rb=k;go(p);window.scrollTo({top:0});};
+  if(B.k===k)fin();else setBook(k,fin);
+}
 function applyTheme(){var t=window.__theme;if(t)document.documentElement.setAttribute("data-theme",t);}
 document.addEventListener("click",function(e){
-  var t=e.target.closest("[data-go],[data-phase],[data-tog],[data-view],[data-tab],[data-rate],[data-qid],button,#theme");if(!t)return;
+  var t=e.target.closest("[data-go],[data-phase],[data-tog],[data-view],[data-tab],[data-rate],[data-qid],[data-book],[data-plango],button,#theme");if(!t)return;
+  if(t.hasAttribute("data-book")){showView(t.getAttribute("data-book"));return;}
+  if(t.hasAttribute("data-plango")){var pq=t.getAttribute("data-plango").split(":");openChapter(pq[0],+pq[1]);return;}
   if(t.hasAttribute("data-hlc")){if(U.sel){var pgx=BYP[S.last];addHl(S.last,{k:"t",a:U.sel.a,b:U.sel.b,c:+t.getAttribute("data-hlc"),q:pgx.text.slice(U.sel.a,U.sel.b).replace(/\s+/g," ").trim().slice(0,220)});U.sel=null;}var sl=window.getSelection();if(sl)sl.removeAllRanges();hidePop();renderReader();renderSide();return;}
   if(t.hasAttribute("data-hlrm")){delHl(S.last,t.getAttribute("data-hlrm"));hidePop();renderReader();renderSide();return;}
   if(t.hasAttribute("data-hcset")){S.set.hc=+t.getAttribute("data-hcset");save();renderReader();return;}
@@ -516,14 +650,14 @@ document.addEventListener("click",function(e){
   if(t.hasAttribute("data-rate")){var q=deck()[U.qi];if(q){S.marks[q.id]={v:+t.getAttribute("data-rate"),ts:Date.now()};save();U.reveal=false;var d=deck();U.qi=Math.min(U.qi+1,Math.max(0,d.length-1));renderTop();renderRail();renderSide();}return;}
   if(t.hasAttribute("data-qid")){var d2=deck(),i=d2.map(function(x){return x.id;}).indexOf(t.getAttribute("data-qid"));if(i<0){U.qf="all";d2=deck();i=d2.map(function(x){return x.id;}).indexOf(t.getAttribute("data-qid"));}U.qi=Math.max(0,i);U.reveal=false;renderSide();return;}
   var id=t.id;
-  if(id==="exp"){var b=new Blob([JSON.stringify(S,null,1)],{type:"application/json"});var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="phase4-progress-"+new Date().toISOString().slice(0,10)+".json";a.click();return;}
+  if(id==="exp"){var b=new Blob([JSON.stringify({books:ST},null,1)],{type:"application/json"});var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="reading-progress-"+new Date().toISOString().slice(0,10)+".json";a.click();return;}
   if(id==="imp"){$("impf").click();return;}
   if(id==="cmp"){S.set.compact=!cmpState();save();renderTop();return;}
   if(id==="hm"){U.hm=!U.hm;if(U.hm){S.set.view=S.set.view==="text"?"page":S.set.view;toast("Highlighter on: drag across the page. Click a highlight to remove it.");}renderReader();return;}
   if(id==="fx"){S.set.focus=!S.set.focus;save();renderReader();window.scrollTo({top:0});return;}
   if(id==="jt"){$("side").scrollIntoView({behavior:"smooth",block:"start"});return;}
   if(id==="up"){$("reader").scrollIntoView({behavior:"smooth",block:"start"});return;}
-  if(id==="theme"){var cur2=document.documentElement.getAttribute("data-theme");var dark=cur2?cur2==="dark":window.matchMedia("(prefers-color-scheme:dark)").matches;document.documentElement.setAttribute("data-theme",dark?"light":"dark");applyAccent();renderTop();return;}
+  if(id==="theme"){var cur2=document.documentElement.getAttribute("data-theme");var dark=cur2?cur2==="dark":window.matchMedia("(prefers-color-scheme:dark)").matches;document.documentElement.setAttribute("data-theme",dark?"light":"dark");renderAll();return;}
   if(id==="nx"||id==="nx2")return next();
   if(id==="pv"||id==="pv2")return prev();
   if(id==="zi"){S.set.zoom=Math.min(2,Math.round((S.set.zoom+.25)*100)/100);save();renderReader();return;}
@@ -536,7 +670,8 @@ document.addEventListener("click",function(e){
 });
 document.addEventListener("change",function(e){
   var t=e.target;
-  if(t.id==="sw"){U.sw=t.checked;if(U.sw){var miss=[];for(var n=1;n<=PH.length;n++){if(!(window.PHASE_DATA&&window.PHASE_DATA[n]))miss.push(n);}var left=miss.length;if(!left){renderSide();}else{toast("Loading all phases for search…");miss.forEach(function(n){ensurePhase(n,function(){if(--left===0)renderSide();});});}}else renderSide();}
+  if(t.id==="sw"){U.sw=t.checked;if(U.sw){var miss=[];for(var n=1;n<=PH.length;n++){if(!(window[B.pd]&&window[B.pd][n]))miss.push(n);}var left=miss.length;if(!left){renderSide();}else{toast("Loading all phases for search…");miss.forEach(function(n){ensurePhase(n,function(){if(--left===0)renderSide();});});}}else renderSide();}
+  else if(t.id==="hd"){U.hideDone=t.checked;renderPlan();}
   else if(t.id==="auto"){S.set.auto=t.checked;save();renderReader();}
   else if(t.id==="pj"){var v=parseInt(t.value,10);if(isFinite(v))go(v,{noScroll:true});else t.value=S.last;}
   else if(t.id==="qf"){U.qf=t.value;U.qi=0;U.reveal=false;renderSide();}
@@ -548,7 +683,7 @@ document.addEventListener("input",function(e){
   else if(t.id==="q"){U.q=t.value;var pos=t.selectionStart;renderSide();var n=$("q");if(n){n.focus();n.setSelectionRange(pos,pos);}renderReader();}
 });
 document.addEventListener("keydown",function(e){
-  var tg=e.target&&e.target.tagName; if(tg==="INPUT"||tg==="TEXTAREA"||tg==="SELECT")return; if(e.metaKey||e.ctrlKey||e.altKey)return;
+  if(V==="plan")return; var tg=e.target&&e.target.tagName; if(tg==="INPUT"||tg==="TEXTAREA"||tg==="SELECT")return; if(e.metaKey||e.ctrlKey||e.altKey)return;
   if(e.key==="ArrowRight"){e.preventDefault();next();}
   else if(e.key==="ArrowLeft"){e.preventDefault();prev();}
   else if(e.key==="m"){mark(S.last,!isRead(S.last));renderTop();renderRail();renderReader();}
@@ -563,15 +698,20 @@ document.addEventListener("keydown",function(e){
 var lastAct=Date.now();
 ["pointerdown","keydown","scroll","touchstart","mousemove"].forEach(function(ev){window.addEventListener(ev,function(){lastAct=Date.now();},{passive:true});});
 setInterval(function(){
-  if(document.visibilityState!=="visible"||Date.now()-lastAct>90000)return;
+  if(V==="plan"||document.visibilityState!=="visible"||Date.now()-lastAct>90000)return;
   var k=today();S.mins[k]=Math.round(((S.mins[k]||0)+0.25)*100)/100;save();
   if(Math.round(S.mins[k]*4)%4===0)renderTop();
 },15000);
-var rt=null;window.addEventListener("resize",function(){clearTimeout(rt);rt=setTimeout(renderReader,150);});
+var rt=null;window.addEventListener("resize",function(){clearTimeout(rt);rt=setTimeout(function(){if(V!=="plan")renderReader();},150);});
 
 /* boot */
-document.addEventListener("change",function(e){if(e.target.id!=="impf")return;var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{S=merge(S,normalize(JSON.parse(r.result)));save();renderAll();alert("Progress imported and merged.");}catch(x){alert("That file could not be read.");}};r.readAsText(f);});
-(function(){var l=localLoad();if(l)S=normalize(l);var n=phaseOf(S.last);ensurePhase(n,function(){applyPhase(n);U.open[chOf(S.last)]=true;renderAll();initCloud();});})();
+document.addEventListener("change",function(e){if(e.target.id!=="impf")return;var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var J=JSON.parse(r.result);if(J.books){Object.keys(BOOKS).forEach(function(k){if(J.books[k])ST[k]=merge(ST[k],normalize(J.books[k]));});}else{ST[B.k]=merge(ST[B.k],normalize(J));}linkSet();S=ST[B.k];save();renderAll();alert("Progress imported and merged.");}catch(x){alert("That file could not be read.");}};r.readAsText(f);});
+(function(){
+  Object.keys(BOOKS).forEach(function(k){ST[k]=normalize(localLoad(BOOKS[k]));});
+  linkSet();
+  V=ST.cb.set.book||"cb"; var rb=V==="plan"?(ST.cb.set.rb||"cb"):V; if(!BOOKS[rb])rb="cb";
+  setBook(rb,function(){renderAll();initCloud();});
+})();
 })();
 </script>
 </body>
