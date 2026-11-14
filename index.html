@@ -581,22 +581,11 @@ function renderReader(){
 
 /* ---------- read view (text edition) ---------- */
 function CHTMLW(){return (window.CHTML&&window.CHTML[B.k])||{};}
-function readOK(pg){var n=pg.ch;return !!n&&!(B.chmissing&&B.chmissing[n]);}
-function ensureChapter(n,cb){
-  if(CHTMLW()[n]){cb();return;}
-  B.chl=B.chl||{};B.chmissing=B.chmissing||{};
-  if(B.chl[n]){B.chl[n].push(cb);return;}
-  B.chl[n]=[cb];
-  var sc=document.createElement("script");sc.src=B.dir+"ch"+n+".js";
-  var done=function(){var q=B.chl[n];B.chl[n]=null;q.forEach(function(f){f();});};
-  sc.onload=done;sc.onerror=function(){B.chmissing[n]=1;done();};
-  document.head.appendChild(sc);
-}
+function readOK(pg){var n=pg.ch;return !!n&&!!CHTMLW()[n];}
 function readStage(pg,img){
   var n=pg.ch;
   if(!readOK(pg))return img;
   var D=CHTMLW()[n];
-  if(!D){var bk=B.k;ensureChapter(n,function(){if(B.k===bk&&V!=="plan"&&S.set.view==="read"&&chOf(S.last)===n)renderReader();});return '<p class="muted" style="padding:30px;text-align:center">Loading the text\u2026</p>';}
   return '<div class="rdwrap'+(S.set.night?' night':'')+'"><article class="rdoc" id="rdoc" style="--z:'+S.set.zoom+'">'+D.h+'<button id="addnote" type="button">\uFF0B Note</button></article></div>';
 }
 function rangeRead(r){for(var q=r[0];q<=r[1];q++){if(!S.read[q])return false;}return true;}
