@@ -13,3 +13,7 @@ Settings → Pages → Deploy from a branch → `main` / `(root)`, then open
 
 ## Lecture Notes and Reading plan
 Version 4 adds the Lecture Notes as a second book (`data/ln/`, `img/ln/`) and a Reading plan tab that orders chapters from both books. Progress for each book is stored separately.
+
+
+## v6: simple three-tab site
+The site now has three tabs: Plan, Complete Book and Lecture Notes. There is only the text edition (no PDF, Text or Split views). Contents sit in the left sidebar and the chapter text is on the right, in an earthy green, maroon, brown and black theme with a dark mode. Highlights, notes under paragraphs, a My notes list and a copy-all button work directly in the text. Saved progress, notes and highlights from earlier versions carry over.
